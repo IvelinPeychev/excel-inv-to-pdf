@@ -28,12 +28,43 @@ for filepath in filepaths:
 
     # data frame
     df = pd.read_excel(filepath, sheet_name='Sheet 1')
+
+    # Extracting the columns titles from the Excel file
+
+    # Add a header
+
+    # without list comprehension
+
+    # columns = list(df.columns)
+    # pdf.set_font(family='Times', size=10)
+    # pdf.set_text_color(80, 80, 80)
+    # pdf.cell(w=30, h=8, txt=columns[0].replace("_", " "), border=1)
+    # pdf.cell(w=70, h=8, txt=columns[1].replace("_", " "), border=1)
+    # pdf.cell(w=30, h=8, txt=columns[2].replace("_", " "), border=1)
+    # pdf.cell(w=30, h=8, txt=columns[3].replace("_", " "), border=1)
+    # # we give new line to the last cell "ln=1" so the table be displayed correctly
+    # pdf.cell(w=30, h=8, txt=columns[4].replace("_", " "), border=1, ln=1)
+
+
+    # with list comprehension
+
+    columns = [item.replace("_", " ").capitalize() for item in list(df.columns)]
+    pdf.set_font(family='Times', size=10, style='B')
+    pdf.set_text_color(80, 80, 80)
+    pdf.cell(w=30, h=8, txt=columns[0], border=1)
+    pdf.cell(w=70, h=8, txt=columns[1], border=1)
+    pdf.cell(w=35, h=8, txt=columns[2], border=1)
+    pdf.cell(w=30, h=8, txt=columns[3], border=1)
+    # we give new line to the last cell "ln=1" so the table be displayed correctly
+    pdf.cell(w=30, h=8, txt=columns[4], border=1, ln=1)
+
+    # Add rows to the table
     for index, row in df.iterrows():
         pdf.set_font(family='Times', size=10)
         pdf.set_text_color(80, 80, 80)
         pdf.cell(w=30, h=8, txt=str(row['product_id']), border=1)
         pdf.cell(w=70, h=8, txt=str(row['product_name']), border=1)
-        pdf.cell(w=30, h=8, txt=str(row['amount_purchased']), border=1)
+        pdf.cell(w=35, h=8, txt=str(row['amount_purchased']), border=1)
         pdf.cell(w=30, h=8, txt=str(row['price_per_unit']), border=1)
         # we give new line to the last cell "ln=1" so the table be displayed correctly
         pdf.cell(w=30, h=8, txt=str(row['total_price']), border=1, ln=1)
