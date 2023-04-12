@@ -69,6 +69,28 @@ for filepath in filepaths:
         # we give new line to the last cell "ln=1" so the table be displayed correctly
         pdf.cell(w=30, h=8, txt=str(row['total_price']), border=1, ln=1)
 
+    total_sum = df['total_price'].sum()
+    pdf.set_font(family='Times', size=10)
+    pdf.set_text_color(80, 80, 80)
+    pdf.cell(w=30, h=8, txt='', border=1)
+    pdf.cell(w=70, h=8, txt='', border=1)
+    pdf.cell(w=35, h=8, txt='', border=1)
+    pdf.cell(w=30, h=8, txt='', border=1)
+    # we give new line to the last cell "ln=1" so the table be displayed correctly
+    pdf.cell(w=30, h=8, txt=str(total_sum), border=1, ln=1)
+
+    # Add a total sum sentence
+    pdf.set_font(family='Times', size=10, style='B')
+    pdf.cell(w=30, h=8, txt=f'The total price is {total_sum}', ln=1)
+
+
+    # Add a company name and logo
+    pdf.set_font(family='Times', size=14, style='B')
+    pdf.cell(w=25, h=8, txt='Pythonhow')
+    pdf.image('pythonhow.png', w=10)
+
+
+
 
     pdf.output(f'PDFs/{filename}.pdf')
 
