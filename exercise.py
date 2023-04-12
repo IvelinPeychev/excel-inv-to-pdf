@@ -20,10 +20,16 @@ for filepath in filepaths:
 
     # Add the name to the PDF
     pdf.set_font(family='Times', size=16, style='B')
-    pdf.cell(w=50, h=8, txt=f'{filename.title()}')
-    # with open(filepath, 'r') as file:
-    #     info = file.readlines()
-    #     pdf.page()
+    pdf.cell(w=50, h=8, txt=f'{filename.title()}', ln=1)
+
+    # Get the context of each text file
+    with open(filepath, 'r') as file:
+        info = file.read()
+
+    # Add the text file content to the pdf
+    pdf.set_font(family="Times", size=12)
+    pdf.multi_cell(w=0, h=6, txt=info)
+
 
 # Produce the PDF document
-pdf.output('Text_Files/Test.pdf')
+pdf.output("output.pdf")
